@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
-
+import styled from 'styled-components';
 import "./App.css";
 import SmurfForm from "./components/SmurfForm";
 import Smurfs from "./components/Smurfs";
+import SmurfCard from "./components/SmurfCard";
 
 class App extends Component {
   constructor(props) {
@@ -28,7 +29,7 @@ class App extends Component {
       });
   }
 
-   updateSmurfs = smurfs => {
+  updateSmurfs = smurfs => {
     this.setState({
       smurfs: smurfs
     });
@@ -38,7 +39,6 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-
           <div className="nav-bar">
             <NavLink to="/">
               <div className="home-button">Home</div>
@@ -48,11 +48,21 @@ class App extends Component {
             </NavLink>
           </div>
 
-          <Route path="/smurf-form"  render={props => <SmurfForm updateSmurfs={this.updateSmurfs} {...props} />}/>
+          <Route
+            path="/smurf-form"
+            render={props => (
+              <SmurfForm updateSmurfs={this.updateSmurfs} {...props} />
+            )}
+          />
           <Route
             exact
             path="/"
             render={props => <Smurfs smurfs={this.state.smurfs} {...props} />}
+          />
+          <Route
+            exact
+            path="/smurfs/:id"
+            render={props => <SmurfCard smurfs={this.state.smurfs} {...props} />}
           />
         </div>
       </Router>

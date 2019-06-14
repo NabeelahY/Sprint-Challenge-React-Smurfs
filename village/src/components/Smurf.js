@@ -1,23 +1,17 @@
-import React from 'react';
-import { Link } from "react-router-dom";
+import React from "react";
 
 const Smurf = props => {
   return (
-    <Link to='/smurf/:id'>
-      <div className="Smurf">
+    <div className="Smurf">
       <h3>{props.name}</h3>
-      <strong>{props.height} tall</strong>
-      <p>{props.age} smurf years old</p>
     </div>
-    </Link>
   );
 };
 
 Smurf.defaultProps = {
-  name: '',
-  height: '',
-  age: ''
+  name: "",
+  height: "",
+  age: ""
 };
 
 export default Smurf;
-
