@@ -1,15 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import axios from "axios";
+import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
 
-import './App.css';
-import SmurfForm from './components/SmurfForm';
-import Smurfs from './components/Smurfs';
+import "./App.css";
+import SmurfForm from "./components/SmurfForm";
+import Smurfs from "./components/Smurfs";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      smurfs: [],
+      smurfs: []
     };
   }
   // add any needed code to ensure that the smurfs collection exists on state and it has data coming from the server
@@ -27,12 +28,34 @@ class App extends Component {
       });
   }
 
+   updateSmurfs = smurfs => {
+    this.setState({
+      smurfs: smurfs
+    });
+  };
+
   render() {
     return (
-      <div className="App">
-        <SmurfForm />
-        <Smurfs smurfs={this.state.smurfs} />
-      </div>
+      <Router>
+        <div className="App">
+
+          <div className="nav-bar">
+            <NavLink to="/">
+              <div className="home-button">Home</div>
+            </NavLink>
+            <NavLink to="/smurf-form">
+              <div className="form-button">Form</div>
+            </NavLink>
+          </div>
+
+          <Route path="/smurf-form"  render={props => <SmurfForm updateSmurfs={this.updateSmurfs} {...props} />}/>
+          <Route
+            exact
+            path="/"
+            render={props => <Smurfs smurfs={this.state.smurfs} {...props} />}
+          />
+        </div>
+      </Router>
     );
   }
 }

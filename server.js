@@ -19,42 +19,6 @@ let smurfs = [
     name: 'Brainey Smurf',
     age: 200,
     height: '8cm'
-  },
-  {
-    id: 1,
-    name: 'Smurfette',
-    age: 20,
-    height: '6cm'
-  },
-  {
-    id: 2,
-    name: 'Gargamel',
-    age: 50,
-    height: '5ft'
-  },
-  {
-    id: 3,
-    name: 'Azrael',
-    age: 5,
-    height: '6m'
-  },
-  {
-    id: 4,
-    name: 'Sassette Smurf',
-    age: 10,
-    height: '6cm'
-  },
-  {
-    id: 5,
-    name: 'Papa Smurf',
-    age: 800,
-    height: '8cm'
-  },
-  {
-    id: 6,
-    name: 'Hefty Smurf',
-    age: 150,
-    height: '7cm'
   }
 ];
 
