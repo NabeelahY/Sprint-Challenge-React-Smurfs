@@ -29,7 +29,8 @@ const SmurfCard = props => {
   console.log(props);
   const [card, updateCard] = useState(props.smurfs);
 
-  const smurfId = props.match.params.id;
+  const id = props.match.params.id;
+  
   useEffect(() => {
     const getSmurf = id => {
       axios
@@ -37,7 +38,7 @@ const SmurfCard = props => {
         .then(res => updateCard(res.data))
         .catch(err => console.log(err));
     };
-    getSmurf(smurfId);
+    getSmurf(id);
   }, [props.match.params.id]);
 
   const deleteSmurf = (id) => {
@@ -55,8 +56,10 @@ const SmurfCard = props => {
     <StyledCard>
       <h3>{`Hi! I am ${card.name}`}</h3>
       <div>{`I am ${card.age} years old and ${card.height} tall.`}</div>
-      <button onClick ={() => deleteSmurf(smurfId)}>Delete</button>
-      <button>Update</button>
+      <button onClick ={() => deleteSmurf(id)}>Delete</button>
+      <button onClick ={() => {
+        props.history.push(`/update-smurf/${card.id}`);
+      }}>Update</button>
     </StyledCard>
   );
 };

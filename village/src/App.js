@@ -1,37 +1,37 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
-import styled from 'styled-components';
-import "./App.css";
+import styled from "styled-components";
 import SmurfForm from "./components/SmurfForm";
 import Smurfs from "./components/Smurfs";
 import SmurfCard from "./components/SmurfCard";
 
-const StyledVillage = styled.div `
+const StyledVillage = styled.div`
   text-align: center;
   margin: 0 auto;
   nav {
     padding: 0.5rem;
     height: 3rem;
-    background-color: #88CCFF;
+    background-color: #88ccff;
     border-bottom: 3px #fbf404 solid;
     display: flex;
     justify-content: flex-end;
-    align-items:center;
+    align-items: center;
 
     a {
       padding: 0 1rem;
       text-decoration: none;
-      color:#fff;
+      color: #fff;
     }
   }
-`
+`;
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      smurfs: []
+      smurfs: [],
+      editing: false
     };
   }
   // add any needed code to ensure that the smurfs collection exists on state and it has data coming from the server
@@ -74,6 +74,18 @@ class App extends Component {
               <SmurfForm updateSmurfs={this.updateSmurfs} {...props} />
             )}
           />
+
+          <Route
+            path="/update-smurf/:id"
+            render={props => (
+              <SmurfForm
+                updateSmurfs={this.updateSmurfs}
+                smurfs={this.state.smurfs}
+                editing={true}
+                {...props}
+              />
+            )}
+          />
           <Route
             exact
             path="/"
@@ -82,7 +94,13 @@ class App extends Component {
           <Route
             exact
             path="/smurfs/:id"
-            render={props => <SmurfCard updateSmurfs={this.updateSmurfs} smurfs={this.state.smurfs} {...props} />}
+            render={props => (
+              <SmurfCard
+                updateSmurfs={this.updateSmurfs}
+                smurfs={this.state.smurfs}
+                {...props}
+              />
+            )}
           />
         </StyledVillage>
       </Router>

@@ -45,15 +45,40 @@ class SmurfForm extends Component {
       height: ""
     };
   }
+  componentDidMount() {
+    const id = this.props.match.params.id;
+
+    if (id) {
+      const smurfEdit = this.props.smurfs.find(item => item.id == id);
+
+      this.setState({
+        id: smurfEdit.id,
+        name: smurfEdit.name,
+        age: smurfEdit.age,
+        height: smurfEdit.height
+      })
+    }
+  }
 
   addSmurf = event => {
+    const id = this.props.match.params.id;
     event.preventDefault();
     // add code to create the smurf using the api
-    axios
+
+    if(this.props.editing) {
+      axios
+      .put(`http://localhost:3333/smurfs/${id}`, this.state)
+      .then(res => this.props.updateSmurfs(res.data))
+      .catch(err => console.log(err))
+      .finally(() => this.props.history.push("/"));
+    } else {
+      axios
       .post(`http://localhost:3333/smurfs`, this.state)
       .then(res => this.props.updateSmurfs(res.data))
       .catch(err => console.log(err))
       .finally(() => this.props.history.push("/"));
+    }
+    
 
     this.setState({
       name: "",
