@@ -1,20 +1,22 @@
-import React from 'react';
+import React from "react";
+import styled from "styled-components";
+
+const StyledSmurf = styled.div `
+    color: #fff;
+`
 
 const Smurf = props => {
   return (
-    <div className="Smurf">
+    <StyledSmurf className="Smurf">
       <h3>{props.name}</h3>
-      <strong>{props.height} tall</strong>
-      <p>{props.age} smurf years old</p>
-    </div>
+    </StyledSmurf>
   );
 };
 
 Smurf.defaultProps = {
-  name: '',
-  height: '',
-  age: ''
+  name: "",
+  height: "",
+  age: ""
 };
 
 export default Smurf;
-
