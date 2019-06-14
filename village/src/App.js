@@ -64,7 +64,7 @@ class App extends Component {
               <div>Home</div>
             </NavLink>
             <NavLink to="/smurf-form">
-              <div>Form</div>
+              <div>Add Smurf</div>
             </NavLink>
           </nav>
 
