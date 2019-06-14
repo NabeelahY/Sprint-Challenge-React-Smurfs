@@ -7,6 +7,26 @@ import SmurfForm from "./components/SmurfForm";
 import Smurfs from "./components/Smurfs";
 import SmurfCard from "./components/SmurfCard";
 
+const StyledVillage = styled.div `
+  text-align: center;
+  margin: 0 auto;
+  nav {
+    padding: 0.5rem;
+    height: 3rem;
+    background-color: #88CCFF;
+    border-bottom: 3px #fbf404 solid;
+    display: flex;
+    justify-content: flex-end;
+    align-items:center;
+
+    a {
+      padding: 0 1rem;
+      text-decoration: none;
+      color:#fff;
+    }
+  }
+`
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -38,15 +58,15 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className="App">
-          <div className="nav-bar">
+        <StyledVillage>
+          <nav>
             <NavLink to="/">
-              <div className="home-button">Home</div>
+              <div>Home</div>
             </NavLink>
             <NavLink to="/smurf-form">
-              <div className="form-button">Form</div>
+              <div>Form</div>
             </NavLink>
-          </div>
+          </nav>
 
           <Route
             path="/smurf-form"
@@ -64,7 +84,7 @@ class App extends Component {
             path="/smurfs/:id"
             render={props => <SmurfCard smurfs={this.state.smurfs} {...props} />}
           />
-        </div>
+        </StyledVillage>
       </Router>
     );
   }

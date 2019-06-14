@@ -1,10 +1,15 @@
 import React from "react";
+import styled from "styled-components";
+
+const StyledSmurf = styled.div `
+    color: #fff;
+`
 
 const Smurf = props => {
   return (
-    <div className="Smurf">
+    <StyledSmurf className="Smurf">
       <h3>{props.name}</h3>
-    </div>
+    </StyledSmurf>
   );
 };
 
