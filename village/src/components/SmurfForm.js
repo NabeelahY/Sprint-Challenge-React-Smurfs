@@ -14,7 +14,8 @@ const StyledForm = styled.div`
      margin: 0.5rem 0;
      border: 1px #88ccff solid;
      border-radius: 0.2rem;
-     text-align: center;
+     font-size: 1.5rem;
+     text-align: left;
      &:focus {
       border: 2px #0fa8eb solid;
      }
@@ -49,14 +50,15 @@ class SmurfForm extends Component {
     const id = this.props.match.params.id;
 
     if (id) {
-      const smurfEdit = this.props.smurfs.find(item => item.id == id);
+      const smurfEdit = this.props.smurfs.find(
+        item => item.id === JSON.parse(id)
+      );
 
       this.setState({
-        id: smurfEdit.id,
         name: smurfEdit.name,
         age: smurfEdit.age,
         height: smurfEdit.height
-      })
+      });
     }
   }
 
@@ -65,20 +67,19 @@ class SmurfForm extends Component {
     event.preventDefault();
     // add code to create the smurf using the api
 
-    if(this.props.editing) {
+    if (this.props.editing) {
       axios
-      .put(`http://localhost:3333/smurfs/${id}`, this.state)
-      .then(res => this.props.updateSmurfs(res.data))
-      .catch(err => console.log(err))
-      .finally(() => this.props.history.push("/"));
+        .put(`http://localhost:3333/smurfs/${id}`, this.state)
+        .then(res => this.props.updateSmurfs(res.data))
+        .catch(err => console.log(err))
+        .finally(() => this.props.history.push("/"));
     } else {
       axios
-      .post(`http://localhost:3333/smurfs`, this.state)
-      .then(res => this.props.updateSmurfs(res.data))
-      .catch(err => console.log(err))
-      .finally(() => this.props.history.push("/"));
+        .post(`http://localhost:3333/smurfs`, this.state)
+        .then(res => this.props.updateSmurfs(res.data))
+        .catch(err => console.log(err))
+        .finally(() => this.props.history.push("/"));
     }
-    
 
     this.setState({
       name: "",
@@ -92,7 +93,6 @@ class SmurfForm extends Component {
   };
 
   render() {
-    console.log(this.props);
     return (
       <StyledForm>
         <form onSubmit={this.addSmurf}>
@@ -114,7 +114,9 @@ class SmurfForm extends Component {
             value={this.state.height}
             name="height"
           />
-          <button type="submit">Add to the village</button>
+          <button type="submit">
+            {this.props.editing ? "Edit Smurf" : "Add to the village"}
+          </button>
         </form>
       </StyledForm>
     );
