@@ -95,7 +95,11 @@ class App extends Component {
             exact
             path="/smurfs/:id"
             render={props => (
-              <SmurfCard updateSmurfs={this.updateSmurfs} {...props} />
+              <SmurfCard
+                updateSmurfs={this.updateSmurfs}
+                smurfs={this.state.smurfs}
+                {...props}
+              />
             )}
           />
         </StyledVillage>

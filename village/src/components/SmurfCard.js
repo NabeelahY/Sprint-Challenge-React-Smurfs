@@ -26,7 +26,7 @@ const StyledCard = styled.div`
 `;
 
 const SmurfCard = props => {
-  const [card, updateCard] = useState([]);
+  const [card, updateCard] = useState(props.smurfs);
 
   const id = props.match.params.id;
 
